@@ -8,6 +8,8 @@ on:
 
 env:
   VERSION: ${{ github.event.inputs.version }}
+  # todo: use the one for buf
+  APP_ID: 417207
 
 jobs:
   prepare:
@@ -20,6 +22,11 @@ jobs:
           exit 1
       - name: Checkout repository code
         uses: actions/checkout@v4
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ env.APP_ID }}
+          private-key: ${{ secrets.TOKEN_EXCHANGE_GH_APP_PRIVATE_KEY }}
       # temporarily skipped
       # - name: setup-go
       #   uses: actions/setup-go@v4
@@ -42,6 +49,6 @@ jobs:
             Release prepared for ${{ env.VERSION }}
 
             Reminder: Verify the changelog
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.app-token.outputs.token }}
       - run: echo "pr created at ${{ steps.create_pr.outputs.url }}"
       # placeholder for slack notification
