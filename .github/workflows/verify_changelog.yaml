@@ -1,5 +1,8 @@
 name: Verify Changelog
 on:
+  pull_request:
+    types:
+      - opened
   push:
     branches:
       - "release/**"
@@ -7,6 +10,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    if:  startsWith(github.head_ref, 'release/')
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v4
