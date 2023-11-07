@@ -10,7 +10,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    if:  startsWith(github.head_ref, 'release/')
+    if: ${{ github.event_name == 'push' || startsWith(github.head_ref, 'release/') }}
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v4
