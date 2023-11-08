@@ -27,4 +27,4 @@ url=$(gh pr create --title "Release v${VERSION}" --body "Release prepared for ${
 Reminder: Verify the changelog")
 
 jq --null-input "{ text: "BufCLI Release for v${VERSION} has been drafted: ${url}" }" \
-curl -sSL -X POST -H "Content-Type: application/json" -d @- "${ WEBHOOK_URL }"
+curl -sSL -X POST -H "Content-Type: application/json" -d @- "${WEBHOOK_URL}"
