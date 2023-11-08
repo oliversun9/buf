@@ -21,7 +21,7 @@ inputs:
 outputs:
   url:
     description: The URL of the pull request
-    value: ${{ steps.create_pr.outputs.url }}
+    value: ${{ steps.create_pr.url.url }}
 runs:
   using: "composite"
   steps:
@@ -37,8 +37,10 @@ runs:
       shell: bash
     - run: git push origin "${{ inputs.branch }}" --force
       shell: bash
-    - run: echo "url=$(gh pr create --title "${{ inputs.title }}" --body "${{ inputs.body }}" ${{ inputs.assignees && format('--assignee "{0}"', inputs.assignees) || '' }})" >> $GITHUB_OUTPUT
-      id: create_pr
+    - run: gh pr create --title "${{ inputs.title }}" --body "${{ inputs.body }}" ${{ inputs.assignees && format('--assignee "{0}"', inputs.assignees) || '' }} > url.txt
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
+    - run: echo "url=$(cat url.txt)" >> $GITHUB_ENV
+      id: url
+      shell: bash
