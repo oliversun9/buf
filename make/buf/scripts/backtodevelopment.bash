@@ -47,7 +47,9 @@ git add .
 git commit -m "Back to development"
 git push --set-upstream origin --force ${BRANCH} 
 # This requires GH_TOKEN.
-url=$(gh pr create --title "Return to Development" --body "Release complete for v${RELEASED_VERSION}"
+url=$(gh pr create --title "Return to Development" --body "Release complete for v${RELEASED_VERSION}")
 
+# todo: send on slack
+echo "draft created at ${url}"
 # jq --null-input "{ text: "BufCLI Release for v${VERSION} has been drafted: ${url}" }" \
 # curl -sSL -X POST -H "Content-Type: application/json" -d @- "${WEBHOOK_URL}"
