@@ -5,14 +5,14 @@ set -euo pipefail
 DIR="$(CDPATH= cd "$(dirname "${0}")/../../.." && pwd)"
 cd "${DIR}"
 
+# We already have set -u, but want to fail early if a required variable is not set.
+: ${GH_TOKEN}
+# : ${WEBHOOK_URL}
+
 if [[ "${VERSION}" == v* ]]; then
   echo "error: VERSION ${VERSION} must not start with 'v'" >&2
   exit 1
 fi
-
-# We already have set -u, but want to fail early if any required variables are unset.
-echo "${GH_TOKEN}" >> /dev/null
-# echo "${WEBHOOK_URL}" >> /dev/null
 
 make updateversion
 make releasechangelog
