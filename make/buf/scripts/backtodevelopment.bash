@@ -50,6 +50,6 @@ git push --set-upstream origin --force ${BRANCH}
 url=$(gh pr create --title "Return to Development" --body "Release complete for v${RELEASED_VERSION}")
 
 # todo: send on slack
-echo "draft created at ${url}"
+echo "PR created at ${url}"
 # jq --null-input "{ text: "BufCLI Release for v${VERSION} has been drafted: ${url}" }" \
 # curl -sSL -X POST -H "Content-Type: application/json" -d @- "${WEBHOOK_URL}"
