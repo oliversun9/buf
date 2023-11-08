@@ -6,7 +6,8 @@ DIR="$(CDPATH= cd "$(dirname "${0}")/../../.." && pwd)"
 cd "${DIR}"
 
 # We already have set -u, but want to fail early if a required variable is not set.
-# : ${GH_TOKEN}
+# However, if you are already logged in for GitHub CLI locally, you can remove this line when running it locally.
+: ${GH_TOKEN}
 # : ${WEBHOOK_URL}
 
 RELEASED_VERSION_LINE=$(grep -oE 'Version.*=.*\"[0-9]\.[0-9]+\.[0-9]+[^\"]*' private/buf/bufcli/bufcli.go)
@@ -51,5 +52,4 @@ url=$(gh pr create --title "Return to Development" --body "Release complete for 
 
 # todo: send on slack
 echo "PR created at ${url}"
-# jq --null-input "{ text: "BufCLI Release for v${VERSION} has been drafted: ${url}" }" \
-# curl -sSL -X POST -H "Content-Type: application/json" -d @- "${WEBHOOK_URL}"
+# jq --null-input "{ text: \"PR back to development: ${url}\" }" | curl -sSL -X POST -H 'Content-Type: application/json' -d@- "${WEBHOOK_URL}"

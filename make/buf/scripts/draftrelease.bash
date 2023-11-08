@@ -6,6 +6,7 @@ DIR="$(CDPATH= cd "$(dirname "${0}")/../../.." && pwd)"
 cd "${DIR}"
 
 # We already have set -u, but want to fail early if a required variable is not set.
+# However, if you are already logged in for GitHub CLI locally, you can remove this line when running it locally.
 : ${GH_TOKEN}
 : ${VERSION}
 # : ${WEBHOOK_URL}
@@ -46,5 +47,6 @@ b loop
 # url=$(gh release create --draft --notes "${release_notes}" --title "v${VERSION}" "v${VERSION}" .build/release/buf/assets/*)
 url=$(gh release create --draft --notes "${release_notes}" --title "v${VERSION}" "v${VERSION}" ./random.txt)
 
-# add slack
+# todo: add slack
 echo "A release has been drafted at ${url}" 
+# jq --null-input "{text:\"BufCLI Release ${VERSION} is complete: ${url}\"}" | curl -sSL -X POST -H 'Content-Type: application/json' -d@- "${WEBHOOK_URL}"

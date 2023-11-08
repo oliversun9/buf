@@ -6,6 +6,7 @@ DIR="$(CDPATH= cd "$(dirname "${0}")/../../.." && pwd)"
 cd "${DIR}"
 
 # We already have set -u, but want to fail early if a required variable is not set.
+# However, if you are already logged in for GitHub CLI locally, you can remove this line when running it locally.
 : ${GH_TOKEN}
 # : ${WEBHOOK_URL}
 
@@ -26,5 +27,6 @@ git push --set-upstream origin --force ${BRANCH}
 url=$(gh pr create --title "Release v${VERSION}" --body "Release prepared for ${VERSION}
 Reminder: Verify the changelog")
 
-# jq --null-input "{ text: "BufCLI Release for v${VERSION} has been drafted: ${url}" }" \
-# curl -sSL -X POST -H "Content-Type: application/json" -d @- "${WEBHOOK_URL}"
+# todo: add slack
+echo "A release has started ${url}" 
+# jq --null-input "{text: \"BufCLI Release v${VERSION} has started: ${url}\" }" | curl -sSL -X POST -H "Content-Type: application/json" -d@- "${WEBHOOK_URL}"
