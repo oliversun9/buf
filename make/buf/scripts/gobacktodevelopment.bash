@@ -7,7 +7,7 @@ cd "${DIR}"
 
 # We already have set -u, but want to fail early if a required variable is not set.
 # However, if you are already logged in for GitHub CLI locally, you can remove this line when running it locally.
-# : ${GH_TOKEN}
+: ${GH_TOKEN}
 # : ${WEBHOOK_URL}
 
 RELEASED_VERSION_LINE=$(grep -oE 'Version.*=.*\"[0-9]\.[0-9]+\.[0-9]+[^\"]*' private/buf/bufcli/bufcli.go)
