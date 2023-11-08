@@ -41,7 +41,7 @@ runs:
       shell: bash
       id: assignees
       if: ${{ inputs.assignees }}
-      run: echo "arg='--assignees $(echo "${{ inputs.assignees }}" | tr -d ' ')'" >> $GITHUB_OUTPUT
+      run: echo "arg='--assignee $(echo "${{ inputs.assignees }}" | tr -d ' ')'" >> $GITHUB_OUTPUT
     - name: print args
       shell: bash
       run: echo "$assignee arg is '{{ steps.assignees.outputs.arg }}'"
