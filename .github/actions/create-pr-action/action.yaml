@@ -37,7 +37,7 @@ runs:
       shell: bash
     - run: git push origin "${{ inputs.branch }}" --force
       shell: bash
-    - run: gh pr create --title "${{ inputs.title }}" --body "${{ inputs.body }}" ${{ inputs.assignees && join(fromJSON(inputs.assignees), ',') || '' }} > url.txt
+    - run: gh pr create --title "${{ inputs.title }}" --body "${{ inputs.body }}" ${{ inputs.assignees && format('--assignee {0}', join(fromJSON(inputs.assignees), ',')) || '' }} > url.txt
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
