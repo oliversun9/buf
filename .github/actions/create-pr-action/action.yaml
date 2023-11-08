@@ -17,7 +17,7 @@ inputs:
     description: The GitHub token.
     required: true
   assignees:
-    description: The assignees, separated by commas. For example, "userA, userB".
+    description: The assignees in the form of a JSON list. For example, ["userA", "userB"].
 outputs:
   url:
     description: The URL of the pull request
@@ -37,7 +37,7 @@ runs:
       shell: bash
     - run: git push origin "${{ inputs.branch }}" --force
       shell: bash
-    - run: gh pr create --title "${{ inputs.title }}" --body "${{ inputs.body }}" ${{ inputs.assignees && format('--assignee "{0}"', inputs.assignees) || '' }} > url.txt
+    - run: gh pr create --title "${{ inputs.title }}" --body "${{ inputs.body }}" ${{ inputs.assignees && join(fromJSON(inputs.assignees), ',') || '' }} > url.txt
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
