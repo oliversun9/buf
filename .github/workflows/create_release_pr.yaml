@@ -25,10 +25,9 @@ jobs:
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
-      - name: Update Version and Changelog and Create PR
-        run: bash ./make/buf/scripts/releasechangelogandversion.bash
+      - name: Create Release PR
+        run: bash ./make/buf/scripts/createreleasepr.bash
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
           VERSION: ${{ github.event.inputs.version }}
           # WEBHOOK_URL: ...
-      # placeholder for slack notification
