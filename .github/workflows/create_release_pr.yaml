@@ -50,6 +50,6 @@ jobs:
 
             Reminder: Verify the changelog
           token: ${{ steps.app-token.outputs.token }}
-          assignees: oliversun9, oliversun09
+          assignees: '["oliversun9", "oliversun09"]'
       - run: echo "pr created at ${{ steps.create_pr.outputs.url }}"
       # placeholder for slack notification
