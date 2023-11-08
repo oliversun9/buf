@@ -10,9 +10,9 @@ if [[ "${VERSION}" == v* ]]; then
   exit 1
 fi
 
-# We already have set -u, but need to use this variable to see if it's set.
-# GH_TOKEN will be used for creating a PR later on.
+# We already have set -u, but want to fail early if any required variables are unset.
 echo "${GH_TOKEN}" >> /dev/null
+# echo "${WEBHOOK_URL}" >> /dev/null
 
 make updateversion
 make releasechangelog
