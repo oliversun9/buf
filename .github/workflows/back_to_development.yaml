@@ -4,12 +4,22 @@ on:
   release:
     types: [published]
 
+env:
+  # todo: use the one for buf
+  APP_ID: 417207
+
 jobs:
   post-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v4
+      - name: Get GitHub App Token
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ env.APP_ID }}
+          private-key: ${{ secrets.TOKEN_EXCHANGE_GH_APP_PRIVATE_KEY }}
       - name: Set up Git Name and Email
         run: |
           git config user.name "${{ github.actor }}"
@@ -17,5 +27,5 @@ jobs:
       - name: Create PR Back to Development
         run: bash ./make/buf/scripts/gobacktodevelopment.bash
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
           # WEBHOOK_URL: ...

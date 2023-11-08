@@ -16,7 +16,8 @@ jobs:
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v4
-      - uses: actions/create-github-app-token@v1
+      - name: Get GitHub App Token
+        uses: actions/create-github-app-token@v1
         id: app-token
         with:
           app-id: ${{ env.APP_ID }}
