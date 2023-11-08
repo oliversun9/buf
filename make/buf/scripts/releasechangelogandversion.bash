@@ -26,4 +26,5 @@ git push --set-upstream origin --force ${branch}
 url=$(gh pr create --title "Release v${VERSION}" --body "Release prepared for ${VERSION}
 Reminder: Verify the changelog")
 
-echo "url is ${url}"
+jq --null-input "{ text: "BufCLI Release for v${VERSION} has been drafted: ${url}" }" \
+curl -sSL -X POST -H "Content-Type: application/json" -d @- "${ WEBHOOK_URL }"
