@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [v4.1.3] - 2023-11-08
 
 - No changes yet.
 
@@ -1069,7 +1069,7 @@ buf check breaking proto --against .git#branch=master,subdir=proto
 
 Initial beta release.
 
-[Unreleased]: https://github.com/bufbuild/buf/compare/v3.20.0...HEAD
+[v4.1.3]: https://github.com/bufbuild/buf/compare/v3.20.0...v4.1.3
 [v3.20.0]: https://github.com/bufbuild/buf/compare/v3.10.1...v3.20.0
 [v3.10.1]: https://github.com/bufbuild/buf/compare/v3.10.0...v3.10.1
 [v3.10.0]: https://github.com/bufbuild/buf/compare/v3.9.0...v3.10.0
