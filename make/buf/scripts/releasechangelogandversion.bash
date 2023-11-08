@@ -23,5 +23,7 @@ git add .
 git commit -m "Update version to ${VERSION}"
 git push --set-upstream origin --force ${branch} 
 # This requires GH_TOKEN.
-gh pr create --title "Release v${VERSION}" --body "Release prepared for ${VERSION}
-Reminder: Verify the changelog"
+url=$(gh pr create --title "Release v${VERSION}" --body "Release prepared for ${VERSION}
+Reminder: Verify the changelog")
+
+echo "url is ${url}"
