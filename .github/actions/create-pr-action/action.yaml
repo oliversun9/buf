@@ -44,7 +44,7 @@ runs:
       run: echo "arg=--assignee $(echo "${{ inputs.assignees }}" | tr -d ' ')" >> $GITHUB_OUTPUT
     - name: print args
       shell: bash
-      run: echo "$assignee arg is '{{ steps.assignees.outputs.arg }}'"
+      run: echo "$assignee arg is '${{ steps.assignees.outputs.arg }}'"
     - run: gh pr create --title "${{ inputs.title }}" --body "${{ inputs.body }}" ${{ steps.assignees.outputs.arg }} > url.txt
       shell: bash
       env:
