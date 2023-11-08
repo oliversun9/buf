@@ -1,0 +1,5 @@
+/usr/bin/sed -i '' "s/Version.*=.*\"[0-9]\.[0-9][0-9]*\.[0-9][0-9]*.*\"/Version = \"5.20.10\"/g" private/buf/bufcli/bufcli.go
+gofmt -s -w private/buf/bufcli/bufcli.go
+/usr/bin/sed -i '' 's/## \[Unreleased\]/## \[v5.20.10\] - 2023-11-08/' CHANGELOG.md
+/usr/bin/sed -i '' -E '/^\[Unreleased\]: .*HEAD$/s/(Unreleased|HEAD)/v5.20.10/g' CHANGELOG.md
+Your branch is up to date with 'origin/release/v5.20.10'.
